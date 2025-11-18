@@ -1,18 +1,41 @@
-import { useState } from "react"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { useAuth } from "./auth.jsx"
+
 import Login from "./pages/login.jsx"
 import Passenger from "./pages/passenger.jsx"
-import Agency from "./pages/ agency.jsx"
-
+import Agency from "./pages/agency.jsx"
+import Profile from "./pages/profile.jsx"
 
 export default function App() {
-  const [v, setV] = useState(0)
-  const a = useAuth()
+  const u = useAuth()
 
-  if (!a.loggedIn) return <Login refresh={() => setV(v + 1)} />
+  // i
+  if (!u.loggedIn) {
+    return <Login />
+  }
 
-  if (a.role === "passenger") return <Passenger refresh={() => setV(v + 1)} />
-  if (a.role === "agency") return <Agency refresh={() => setV(v + 1)} />
+  return (
+    <Routes>
 
-  return null
+      {/* Profile page for both roles */}
+      <Route path="/profile" element={<Profile />} />
+
+      {/* Passenger routes */}
+      {u.role === "passenger" && (
+        <>
+          <Route path="/" element={<Passenger />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      )}
+
+      {/* Agency routes */}
+      {u.role === "agency" && (
+        <>
+          <Route path="/" element={<Agency />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      )}
+
+    </Routes>
+  )
 }

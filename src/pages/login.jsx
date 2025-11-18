@@ -18,8 +18,8 @@ export default function Login({ refresh }) {
           <option value="agency">agency</option>
         </select>
       </label>
-      <button onClick={go}>continue</button>
-      <button onClick={() => refresh()}>guest</button>
+      <button onClick={go}>continue as guest</button>
+      {/* <button onClick={() => refresh()}>Guest</button> */}
     </div>
   )
 }

@@ -9,7 +9,7 @@ export function setUser(v) {
 
 export function logout() {
   localStorage.removeItem("user");
-  localStorage.removeItem("profile");
+  // localStorage.removeItem("profile");
   window.location.reload();
 }
 

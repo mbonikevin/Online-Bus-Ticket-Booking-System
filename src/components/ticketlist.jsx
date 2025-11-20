@@ -1,6 +1,6 @@
 export default function TicketList({ list, onDelete, onEdit }) {
   return (
-    <ul>
+    <ul className="mt-6">
       {list.map(x => (
         <li key={x.id}>
           {x.from} to {x.to} at {x.time}

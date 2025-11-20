@@ -1,28 +1,30 @@
 import { Link } from "react-router-dom";
-import { logout, getTickets } from "../store.jsx";
+import { logout, getTickets, getProfile } from "../store.jsx";
+import Wrapper from "../components/Wrapper.jsx";
 
 export default function Passenger({ refresh }) {
   const t = getTickets();
+  const p = getProfile();
 
   return (
-    <div>
-      <h2>passenger</h2>
-      <button
-        onClick={() => {
-          logout();
-          refresh();
-        }}
-      >
-        logout
-      </button>
-      <Link to="/profile">profile</Link>
-      <ul>
+    <Wrapper>
+      <h2 className="text-xl font-medium">Hello, {p.username} 👋</h2>
+
+      <h3 className="text-black/70 mt-1 mb-4">Available Tickets:</h3>
+
+      <ul className="flex flex-col gap-3">
         {t.map((x) => (
-          <li key={x.id}>
-            {x.from} to {x.to} at {x.time}
+          <li
+            key={x.id}
+            className="border border-stone-200 bg-stone-50 rounded-xl p-4 text-black/80"
+          >
+            <div className="font-semibold">
+              {x.from} <span className="text-black/50">to</span> {x.to}
+            </div>
+            <div className="text-sm text-black/60 mt-1">at {x.time}</div>
           </li>
         ))}
       </ul>
-    </div>
+    </Wrapper>
   );
 }

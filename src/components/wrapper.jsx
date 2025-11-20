@@ -28,7 +28,6 @@ function Wrapper({ children }) {
               <button
                 onClick={() => {
                   logout();
-                  refresh();
                 }}
                 className="text-red-500 hover:text-red-600 font-medium max-sm:text-sm"
               >

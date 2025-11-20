@@ -1,14 +1,14 @@
-import { logout, getTickets, saveTickets, getProfile } from "../store.jsx";
+import { logout, getTickets, saveTickets, getAgencyProfile } from "../store.jsx";
 import { useState } from "react";
 import TicketForm from "../components/ticketform.jsx";
 import TicketList from "../components/ticketlist.jsx";
 import { Link } from "react-router-dom";
-import Wrapper from "../components/Wrapper.jsx";
+import Wrapper from "../components/wrapper.jsx";
 
 export default function Agency({ refresh }) {
   const [tickets, setTickets] = useState(getTickets());
   const [editing, setEditing] = useState(null); // {id, from, to, time} ot null
-  const p = getProfile()
+  const p = getAgencyProfile()
 
   const add = (t) => {
     const n = [...tickets, t];

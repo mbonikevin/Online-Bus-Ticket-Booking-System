@@ -6,7 +6,6 @@ export default function TicketForm({ onAdd, onUpdate, editing }) {
   const [to, setTo] = useState("");
   const [time, setTime] = useState("");
 
-  // Load ticket when editing
   useEffect(() => {
     if (editing) {
       setFrom(editing.from);
@@ -31,7 +30,7 @@ export default function TicketForm({ onAdd, onUpdate, editing }) {
 
   return (
     <div className="">
-      <div className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 my-4">
+      <div className="grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-4 my-4">
         <input
           placeholder="from"
           value={from}
@@ -57,7 +56,7 @@ export default function TicketForm({ onAdd, onUpdate, editing }) {
         onClick={save}
         className={`${buttonStyle} `}
       >
-        {editing ? "update ticket" : "Create ticket"}
+        {editing ? "Update ticket" : "Create ticket"}
       </button>
       </div>
 

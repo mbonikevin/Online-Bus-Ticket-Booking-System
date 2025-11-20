@@ -1,12 +1,17 @@
-import { getProfile, saveProfile } from "../store.jsx";
+import {
+  getPassengerProfile,
+  savePassengerProfile,
+  getAgencyProfile,
+  saveAgencyProfile,
+} from "../store.jsx";
 import { useState } from "react";
 import { useAuth } from "../auth.jsx";
-import Wrapper from "../components/Wrapper.jsx";
+import Wrapper from "../components/wrapper.jsx";
 import { buttonStyle, inputStyle } from "./login.jsx";
 
 export default function Profile() {
   const { role } = useAuth();
-  const p = getProfile();
+  const p = role === "passenger" ? getPassengerProfile() : getAgencyProfile();
 
   const [username, setUsername] = useState(p?.username || "");
   const [agencyName, setAgencyName] = useState(p?.agencyName || "");
@@ -14,9 +19,9 @@ export default function Profile() {
 
   const save = () => {
     if (role === "passenger") {
-      saveProfile({ username });
+      savePassengerProfile({ username });
     } else {
-      saveProfile({ agencyName, branchName });
+      saveAgencyProfile({ agencyName, branchName });
     }
     alert("saved");
   };

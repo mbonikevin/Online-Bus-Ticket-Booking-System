@@ -29,11 +29,29 @@ export function saveTickets(t) {
   localStorage.setItem("tickets", JSON.stringify(t));
 }
 
-export function getProfile() {
-  const v = localStorage.getItem("profile");
+// export function getProfile() {
+//   const v = localStorage.getItem("profile");
+//   return v ? JSON.parse(v) : null;
+// }
+
+// export function saveProfile(p) {
+//   localStorage.setItem("profile", JSON.stringify(p));
+// }
+
+export function getPassengerProfile() {
+  const v = localStorage.getItem("profile_passenger");
   return v ? JSON.parse(v) : null;
 }
 
-export function saveProfile(p) {
-  localStorage.setItem("profile", JSON.stringify(p));
+export function savePassengerProfile(p) {
+  localStorage.setItem("profile_passenger", JSON.stringify(p));
+}
+
+export function getAgencyProfile() {
+  const v = localStorage.getItem("profile_agency");
+  return v ? JSON.parse(v) : null;
+}
+
+export function saveAgencyProfile(p) {
+  localStorage.setItem("profile_agency", JSON.stringify(p));
 }

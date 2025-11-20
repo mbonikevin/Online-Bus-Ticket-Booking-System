@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { setUser, saveProfile, getProfile } from "../store.jsx";
+import {
+  setUser,
+  getPassengerProfile,
+  savePassengerProfile,
+  getAgencyProfile,
+  saveAgencyProfile,
+} from "../store.jsx";
+
 import { BusBg, Logo } from "../assets/index.js";
 import { useNavigate } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
 
 export const inputStyle = `border-2 border-stone-200 focus:border-main-color outline-none rounded-2xl px-3 py-2.5 w-full flex items-center justify-center gap-2`;
 export const buttonStyle = `bg-main-color hover:bg-main-color-dark text-white select-none text-base font-semibold p-3 w-full flex items-center justify-center gap-2 rounded-2xl`;
 export default function Login() {
   const [role, setRole] = useState("passenger");
   const [username, setUsername] = useState("");
-  const p = getProfile();
+  const agency = getAgencyProfile();
   const navigate = useNavigate();
 
   const go = () => {
@@ -16,17 +24,21 @@ export default function Login() {
       if (!username) return alert("enter a username");
 
       setUser({ role: "passenger" });
-      saveProfile({ username });
+      savePassengerProfile({ username });
     }
 
     if (role === "agency") {
       setUser({ role: "agency" });
-
-      saveProfile({
-        agencyName: "DreamLine",
-        branchName: "Main Branch",
-      });
+      if (!agency) {
+        const newAgency = {
+          agencyName: "DreamLine",
+          branchName: "Main Branch",
+        };
+        saveAgencyProfile(newAgency);
+        navigate("/agency-profile");
+      }
     }
+
     window.location.reload();
   };
 
@@ -93,9 +105,31 @@ export default function Login() {
           )}
 
           {role === "agency" && (
-            <div className="w-full bg-stone-200 mt-5">
-              <div className="bg-white w-full p-4 rounded-2xl">
-                {p.agencyName ? <>{p.agencyName}</> : <>DreamLines</>}
+            <div className="w-full bg-stone-200/60 mt-5 p-1 rounded-2xl">
+              <div className="bg-white w-full p-3 rounded-xl">
+                {agency?.agencyName ? (
+                  <div className="w-full flex items-center justify-start gap-4">
+                    <div className="size-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
+                      {agency.agencyName.charAt(0)}
+                    </div>
+                    <div className="flex-1 flex flex-col">
+                      <p className=" font-medium">{agency.agencyName}</p>
+                      <p className=" text-sm text-black/70">Agency</p>
+                    </div>{" "}
+                    <FaCheckCircle className="text-green-600 text-xl mr-1" />
+                  </div>
+                ) : (
+                  <div className="w-full flex items-center justify-start gap-4">
+                    <div className="size-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-2xl">
+                      D
+                    </div>
+                    <div className="flex-1 flex flex-col">
+                      <p className=" font-medium">DreamLine</p>
+                      <p className=" text-sm text-black/70">Agency</p>
+                    </div>{" "}
+                    <FaCheckCircle className="text-green-600 text-xl mr-1" />
+                  </div>
+                )}
               </div>
             </div>
           )}

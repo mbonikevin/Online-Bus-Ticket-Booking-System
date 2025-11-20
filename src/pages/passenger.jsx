@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { logout, getTickets, getProfile } from "../store.jsx";
-import Wrapper from "../components/Wrapper.jsx";
+import { logout, getTickets, getPassengerProfile } from "../store.jsx";
+import Wrapper from "../components/wrapper.jsx";
 
 export default function Passenger({ refresh }) {
   const t = getTickets();
-  const p = getProfile();
+  const p = getPassengerProfile();
 
   return (
     <Wrapper>

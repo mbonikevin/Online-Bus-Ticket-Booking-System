@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { setUser, saveProfile } from "../store.jsx";
+import { setUser, saveProfile, getProfile } from "../store.jsx";
 import { BusBg, Logo } from "../assets/index.js";
+import { useNavigate } from "react-router-dom";
 
 export const inputStyle = `border-2 border-stone-200 focus:border-main-color outline-none rounded-2xl px-3 py-2.5 w-full flex items-center justify-center gap-2`;
 export const buttonStyle = `bg-main-color hover:bg-main-color-dark text-white select-none text-base font-semibold p-3 w-full flex items-center justify-center gap-2 rounded-2xl`;
 export default function Login() {
   const [role, setRole] = useState("passenger");
   const [username, setUsername] = useState("");
+  const p = getProfile();
+  const navigate = useNavigate();
 
   const go = () => {
     if (role === "passenger") {
@@ -91,7 +94,9 @@ export default function Login() {
 
           {role === "agency" && (
             <div className="w-full bg-stone-200 mt-5">
-              <div className="bg-white w-full p-4 rounded-2xl">{}</div>
+              <div className="bg-white w-full p-4 rounded-2xl">
+                {p.agencyName ? <>{p.agencyName}</> : <>DreamLines</>}
+              </div>
             </div>
           )}
 

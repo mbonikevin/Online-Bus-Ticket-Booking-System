@@ -9,8 +9,7 @@ export function setUser(v) {
 
 export function logout() {
   localStorage.removeItem("user");
-  // localStorage.removeItem("profile");
-  window.location.reload();
+  window.location.href = "/";
 }
 
 export function getTickets() {

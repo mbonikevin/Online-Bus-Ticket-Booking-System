@@ -6,25 +6,10 @@ This is a small React prototype and it is meant to show how a bus ticket system 
 
 * It has two types of users:
 
-  * **Passenger**: can view available tickets
-  * **Agency**: can create and delete tickets
-* Simple login screen where you choose a role or continue as a guest
+  * **Passenger**: can view available tickets (plus a simulation of purchasing them)
+  * **Agency**: can create and delete tickets (plus view bookings)
+* Simple login screen where you choose a role and continue as a guest
 * All data is stored in `localStorage`
-* No backend and no routing library
-
-## How the “pages” work without changing the URL
-
-This app doesn’t actually move between real pages, theres only one browser URL everytime
-
-when the app loads, React checks `localStorage`
-
-* If there’s no user, it shows the login screen
-* If the user is a passenger, it shows the passenger view
-* If the user is an agency, it shows the agency view
-
-Refreshing the page still shows the correct screen because the user info and the tickets are stored in `localStorage`, so the app can rebuild the state every time it loads
-
-##
 
 ## Features
 
@@ -34,7 +19,7 @@ Pick a role (passenger or agency) and continue as guest. The selected role is sa
 
 ### Passenger view
 
-Shows a simple list of tickets that the agency created.
+Shows a simple list of tickets that the agency created. and a passenger can edi their username and view their purchased tickets
 
 ### Agency view
 
@@ -42,6 +27,7 @@ Can:
 
 * Add tickets with fields (from, to, time)
 * Delete tickets
+* See th bookings
 * and all changes are stored in `localStorage`
 
 ## The File structure
@@ -57,9 +43,13 @@ src/
     login.jsx
     passenger.jsx
     agency.jsx
+    profile.jsx
   components/
     ticketform.jsx
     ticketlist.jsx
+    wrapper.jsx
+  styles/
+    main.css
 ```
 
 ## Running the project
@@ -70,10 +60,10 @@ src/
 2. Start the app with
    `npm run dev`
 
-3. Open your browser and test the flow
+3. Open your browser and test the system
 
 ## Notes
 
 * This app is not meant to be production ready it is just a prototype
-* There is no security measures
-* There is no backend or API
+* There is no security measures at the moment
+* There is no backend or API at the moment

@@ -1,8 +1,14 @@
-import React from "react";
-import { logout } from "../store";
-import { Link } from "react-router-dom";
+import { logout, getUser } from "../store.jsx";
+import { NavLink } from "react-router-dom";
 
 function Wrapper({ children }) {
+  const u = getUser();
+
+  const linkClass = ({ isActive }) =>
+    `inline-block max-sm:text-sm hover:text-blue-600 ${
+      isActive ? "text-blue-500" : ""
+    }`;
+
   return (
     <div>
       <div className="w-full flex items-center justify-center">
@@ -11,24 +17,32 @@ function Wrapper({ children }) {
             <h1 className="font-extrabold text-3xl text-main-color max-sm:text-xl">
               OBTBS
             </h1>
+
             <div className="w-fit flex items-center gap-5 max-sm:gap-3">
-              <Link
-                to="/"
-                className="inline-block max-sm:text-sm hover:text-blue-600"
-              >
+              <NavLink to="/" className={linkClass}>
                 Home
-              </Link>
-              <Link
-                to="/profile"
-                className="inline-block font- max-sm:text-sm hover:text-blue-600"
-              >
+              </NavLink>
+
+              {u?.role === "passenger" && (
+                <NavLink to="/my-bookings" className={linkClass}>
+                  My Bookings
+                </NavLink>
+              )}
+
+              {u?.role === "agency" && (
+                <NavLink to="/reports" className={linkClass}>
+                  Reports
+                </NavLink>
+              )}
+
+              <NavLink to="/profile" className={linkClass}>
                 Profile
-              </Link>
+              </NavLink>
+
               <p className="text-black/30">|</p>
+
               <button
-                onClick={() => {
-                  logout();
-                }}
+                onClick={logout}
                 className="text-red-500 hover:text-red-600 font-medium max-sm:text-sm"
               >
                 Logout

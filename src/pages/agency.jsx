@@ -5,7 +5,7 @@ import TicketList from "../components/ticketlist.jsx";
 import { Link } from "react-router-dom";
 import Wrapper from "../components/wrapper.jsx";
 
-export default function Agency({ refresh }) {
+export default function Agency() {
   const [tickets, setTickets] = useState(getTickets());
   const [editing, setEditing] = useState(null); // {id, from, to, time} ot null
   const p = getAgencyProfile()

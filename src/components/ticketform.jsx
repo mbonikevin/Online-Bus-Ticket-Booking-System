@@ -5,27 +5,37 @@ export default function TicketForm({ onAdd, onUpdate, editing }) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [time, setTime] = useState("");
+  const [seats, setSeats] = useState("");
+  const [price, setPrice] = useState("");
 
   useEffect(() => {
     if (editing) {
       setFrom(editing.from);
       setTo(editing.to);
       setTime(editing.time);
+      setSeats(editing.seatsAvailable);
+      setPrice(editing.price);
     }
   }, [editing]);
 
   const save = () => {
-    if (!from || !to || !time) return;
+    if (!from || !to || !time || !seats) return;
 
-    if (editing) {
-      onUpdate({ id: editing.id, from, to, time });
-    } else {
-      onAdd({ id: Date.now().toString(), from, to, time });
-    }
+    const ticket = {
+      id: editing ? editing.id : Date.now().toString(),
+      from,
+      to,
+      time,
+      seatsAvailable: Number(seats),
+      price: Number(price),
+    };
+
+    editing ? onUpdate(ticket) : onAdd(ticket);
 
     setFrom("");
     setTo("");
     setTime("");
+    setSeats("");
   };
 
   return (
@@ -35,32 +45,43 @@ export default function TicketForm({ onAdd, onUpdate, editing }) {
           placeholder="from"
           value={from}
           onChange={(e) => setFrom(e.target.value)}
-          required
-          className={`${inputStyle}`}
+          className={inputStyle}
         />
+
         <input
           placeholder="to"
           value={to}
           onChange={(e) => setTo(e.target.value)}
-          required
-          className={`${inputStyle}`}
+          className={inputStyle}
         />
+
         <input
           placeholder="time"
           value={time}
           onChange={(e) => setTime(e.target.value)}
-          required
-          className={`${inputStyle}`}
+          className={inputStyle}
         />
-        <button
-        onClick={save}
-        className={`${buttonStyle} `}
-      >
-        {editing ? "Update ticket" : "Create ticket"}
-      </button>
-      </div>
 
-      
+        <input
+          placeholder="seats available"
+          value={seats}
+          onChange={(e) => setSeats(e.target.value)}
+          className={inputStyle}
+          type="number"
+        />
+
+        <input
+          placeholder="price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className={inputStyle}
+          type="number"
+        />
+
+        <button onClick={save} className={buttonStyle}>
+          {editing ? "Update ticket" : "Create ticket"}
+        </button>
+      </div>
     </div>
   );
 }

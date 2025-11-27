@@ -19,7 +19,12 @@ Pick a role (passenger or agency) and continue as guest. The selected role is sa
 
 ### Passenger view
 
-Shows a simple list of tickets that the agency created. and a passenger can edi their username and view their purchased tickets
+Can:
+
+* See list of tickets that the agency created
+* Edit their username
+* See purchased tickets and reserved seats
+* Download ticket and pdf or send it to email
 
 ### Agency view
 
@@ -27,30 +32,11 @@ Can:
 
 * Add tickets with fields (from, to, time)
 * Delete tickets
-* See th bookings
-* and all changes are stored in `localStorage`
+* See the bookings and amount they earned
+* Edit their Agency name and branch
 
-## The File structure
 
-```
-src/
-  main.jsx
-  app.jsx
-  auth.jsx
-  store.jsx
-  main.css
-  pages/
-    login.jsx
-    passenger.jsx
-    agency.jsx
-    profile.jsx
-  components/
-    ticketform.jsx
-    ticketlist.jsx
-    wrapper.jsx
-  styles/
-    main.css
-```
+And all changes are stored in `localStorage`
 
 ## Running the project
 
@@ -61,9 +47,3 @@ src/
    `npm run dev`
 
 3. Open your browser and test the system
-
-## Notes
-
-* This app is not meant to be production ready it is just a prototype
-* There is no security measures at the moment
-* There is no backend or API at the moment

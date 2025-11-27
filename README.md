@@ -40,10 +40,12 @@ And all changes are stored in `localStorage`
 
 ## Running the project
 
-1. Install dependencies first by running
+1. Clone The project
+
+2. Install dependencies first by running
    `npm install`
 
-2. Start the app with
+3. Start the app with
    `npm run dev`
 
-3. Open your browser and test the system
+4. Open your browser and test the system
